@@ -10,7 +10,7 @@ const Gamescreen = () => {
 
   const reload = () => {
     setTimeout(() => {
-        setMagazine(6);}, "3000"
+        setMagazine(6);}, "3001"
     )
   }
 
