@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Bubble = ({magazine,setMagazine,setscore,score}) => {
+const Bubble = ({magazine,setMagazine,setscore,score,bonus}) => {
 
 const [bubble, setBubble] = useState({});
 ////////////BUBBLE PROPERTIES///////////////////////
@@ -18,7 +18,7 @@ useEffect(()=>{
                 size:sizePalette[indexSize],
                 speed: speedValue,
                 startPoint: startPosition,
-                value: (speedValue+1)*(indexSize+1)});
+                value: (speedValue+1)*(indexSize+1) + bonus});
 },[])
 const hitOk = (addpoint) => {
     setscore(score+addpoint)
@@ -35,7 +35,8 @@ return (
             , height: bubble.size + "px"
             , width: bubble.size + "px"
             , borderRadius: (bubble.size/2) + "px"
-            , position: 'absolute'
+            , position: "absolute"
+            , zIndex:"3"
             , right : bubble.startPoint + "%"
             , top : bubble.startPoint + "%"
             , value: bubble.value}}

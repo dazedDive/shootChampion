@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "kindergarten";
+    src: local("kindergarten"),
+    url("./fonts/kindergarten.ttf") format('truetype');
+    font-weight: normal;
+}
