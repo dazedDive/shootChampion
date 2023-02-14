@@ -2,8 +2,9 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { useState } from 'react';
 import Weapon from '../components/Weapon';
 import BubbleGenerator from '../components/BubbleGenerator';
+import ModalEndGame from '../components/ModalEndGame';
 
-const Gamescreen = ({modegame,setmodegame}) => {
+const Gamescreen = ({modegame, gameover, setgameover, setstartgame}) => {
 const scoreScreen = useRef()
 
   const [magazine, setMagazine] = useState("6");
@@ -11,10 +12,9 @@ const scoreScreen = useRef()
 
   const reload = () => {
     setTimeout(() => {
-        setMagazine(6);}, "3001"
+        setMagazine(6);}, "222"
     )
   }
-  const [colorText, setColorText] = useState("")
 
   useLayoutEffect(()=>{
 
@@ -43,33 +43,40 @@ const scoreScreen = useRef()
                 <Weapon
                 magazine={magazine}/>
                 {!magazine &&
-                <img src="images/reloadbutton.png" alt="reload icone" className="titleAnim"
+                <img src="images/reload.png" alt="reload icone" className="titleAnim"
                 onClick={(e)=>reload()}/>
                 }
         </div>
-          <div className="col-7" onClick={(e)=>magazine && setMagazine(magazine-1)}>
-            <img className="img-fluid backscreen w-100 mt-5 ms-2 me-2" src="images/backpaper.jpg" alt="backscreen"/>
+          <div className="col-7" onClick={(e)=>{magazine && setMagazine(magazine-1);
+                                                magazine && setScore(c=>c-modegame.malus)}}>
+            <img className="img-fluid backscreen w-100 mt-5 ms-2 me-2" src="images/backpaper.jpg" alt="backscreen"
+            style={{ userSelect: "none" }}/>
               <div className="container m-1"
               >
                 <BubbleGenerator
                 modegame={modegame}
-                setmodegame={setmodegame}
                 style={{position: "relative"}}
                 setMagazine={setMagazine}
                 magazine={magazine}
                 score={score}
                 setscore={setScore}
+                setgameover={setgameover}
+                gameover={gameover}
+                setstartgame={setstartgame}
                 />
               </div>
           </div>
         <div className="col-2">
           <span className="d-flex justify-content-center">
-            <img className="img-fluid" src="images/score.png" alt="scoretext"/>
+            <img className="img-fluid" src="images/score.png" alt="scoretext"
+            style={{ userSelect: "none" }}/>
           </span>
             <h2 className="Kindergarten text-center"
+            style={{ userSelect: "none" }}
             ref={scoreScreen}>{score}</h2>
         </div>
       </div>
+
     </div>
 
   );

@@ -2,11 +2,21 @@ import React, { useState } from 'react';
 
 const Loginscreen = ({startgame, setstartgame, setmodegame}) => {
 
-
     const startFunction = (select) =>{
-        setstartgame(!startgame);
-        setmodegame({mode:select})
+        !startgame && setstartgame(true);
+        switch (select) {
+            case "normal" :
+                setmodegame({mode:select, speed:1222, bonus: 0, malus : 0});
+                break;
+            case "nightmare" :
+                setmodegame({mode:select, speed:999, bonus: 10, malus : 10});
+                break;
+            case "hellfire" :
+                setmodegame({mode:select, speed:666, bonus: 20, malus : 20});
+                break;
+        }
     }
+
     return (
         <div className ="container">
             <div className="row mt-5">

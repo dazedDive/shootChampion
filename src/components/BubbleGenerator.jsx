@@ -1,21 +1,13 @@
 import { useEffect,useState } from "react"
 import Bubble from "./Bubble"
+import ModalEndGame from "./ModalEndGame";
 
-const BubbleGenerator = ({magazine,setMagazine,setscore,score,modegame,setmodegame}) => {
+const BubbleGenerator = ({magazine,setMagazine,setscore,score,modegame,gameover,setgameover,setstartgame}) => {
     const [timeCount, setTimeCount] = useState(0)
-    switch (modegame.mode) {
-        case "normal":
-            setmodegame({mode:"normal", speed:"1450", bonus:0});
-            break;
-        case "nightmare":
-            setmodegame({mode:"nightmare", speed:"1000", bonus:10});
-            break;
-        case "hellfire":
-            setmodegame({mode:"hellfire", speed:"750", bonus:25});
-            break;
-    }
+
     const generator = () => {
         timeCount!=30 && setTimeout(()=>{setTimeCount(timeCount+1)},modegame.speed)};
+        timeCount > 29 && setgameover(true);
         useEffect(()=>{generator()},[timeCount]);
         return(
             <>
@@ -27,6 +19,19 @@ const BubbleGenerator = ({magazine,setMagazine,setscore,score,modegame,setmodega
                 score={score}
                 bonus={modegame.bonus}
                 />:""}
+            {gameover &&
+            <ModalEndGame
+            style={{position:"relative",
+                    zIndex: "5"}}
+            score={score}
+            setscore={setscore}
+            gameover={gameover}
+            setgameover={setgameover}
+            setstartgame={setstartgame}
+            settimecount={setTimeCount}
+            setmagazine={setMagazine}
+            />
+            }
             </>
     )
 }
