@@ -31,6 +31,7 @@ const BubbleGenerator = ({magazine,setMagazine,setscore,score,modegame,gameover,
             setgameover={setgameover}
             setstartgame={setstartgame}
             settimecount={setTimeCount}
+            setMagazine={setMagazine}
             />
             }
             </>

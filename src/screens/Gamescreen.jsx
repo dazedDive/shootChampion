@@ -2,14 +2,22 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { useState } from 'react';
 import Weapon from '../components/Weapon';
 import BubbleGenerator from '../components/BubbleGenerator';
+import BangSound from '../sounds/fire.mp3';
+import ReloadSound from '../sounds/reload.mp3';
+import Empty from '../sounds/empty.mp3';
 
 const Gamescreen = ({modegame, gameover, setgameover, setstartgame}) => {
 const scoreScreen = useRef()
 
   const [magazine, setMagazine] = useState(6);
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(0);
+  //////////////////////////Import sounds effects/////////////
+  const shootSound = new Audio (BangSound);
+  const reloadSound = new Audio (ReloadSound);
+  const emptySound = new Audio (Empty);
 
   const reload = () => {
+    reloadSound.play();
     setTimeout(() => {
         setMagazine(6);}, "222"
     )
@@ -50,7 +58,8 @@ const scoreScreen = useRef()
           <div className="col-7"
           style={{position: "relative"}}
           onClick={(e)=>{magazine && setMagazine(magazine-1);
-                                                magazine && setScore(c=>c-modegame.malus)}}>
+                                                magazine && setScore(c=>c-modegame.malus);
+                                                magazine ? shootSound.play() : emptySound.play()}}>
             {!gameover &&
             <img className="img-fluid backscreen w-100 mt-5 ms-2 me-2" src="images/backpaper.jpg" alt="backscreen"
             style={{ userSelect: "none" }}/>}
@@ -62,6 +71,8 @@ const scoreScreen = useRef()
                 magazine={magazine}
                 score={score}
                 setscore={setScore}
+                shootsound={shootSound}
+                emptysound={emptySound}
                 setgameover={setgameover}
                 gameover={gameover}
                 setstartgame={setstartgame}

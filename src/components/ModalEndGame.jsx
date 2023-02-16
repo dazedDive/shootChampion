@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-const ModalEndGame = ({setgameover, gameover, score, settimecount, setstartgame}) => {
+const ModalEndGame = ({setgameover, gameover, score, settimecount, setstartgame, setMagazine}) => {
     const [rank, setRank] = useState({picture : "", text : "", modal:false})
 
     useEffect(()=>{
+        setMagazine(false);
         if (score < 600) {
             setRank({picture:"/images/bronze.png", text:"You are a Noob or maybe your mouse is broken?", modal:true })
         }

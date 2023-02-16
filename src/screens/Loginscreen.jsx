@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-
+import musicMainTheme from "../sounds/songbubble.mp3"
+import ThatRight from "../sounds/thatright.mp3"
 const Loginscreen = ({startgame, setstartgame, setmodegame}) => {
 
+    const startSound = new Audio(ThatRight);
+    const musicTheme = new Audio(musicMainTheme)
     const startFunction = (select) =>{
         !startgame && setstartgame(true);
+        startSound.play();
         switch (select) {
             case "normal" :
-                setmodegame({mode:select, speed:1222, bonus: 0, malus : 0, opacityBonus : 0.5});
+                setmodegame({mode:select, speed:999, bonus: 0, malus : 0, opacityBonus : 0.5});
                 break;
             case "nightmare" :
-                setmodegame({mode:select, speed:999, bonus: 50, malus : 25, opacityBonus : 0.2});
+                setmodegame({mode:select, speed:799, bonus: 50, malus : 25, opacityBonus : 0.2});
                 break;
             case "hellfire" :
-                setmodegame({mode:select, speed:666, bonus: 120, malus : 80, opacityBonus : 0});
+                setmodegame({mode:select, speed:666, bonus: 160, malus : 80, opacityBonus : 0});
                 break;
         }
     }

@@ -19,6 +19,10 @@
 .footer{
     color : whitesmoke;
     background-color: rgb(176, 0, 129);
+    position: absolute;
+    bottom: 0%;
+    left: auto;
+    right: auto;
 }
 
 .noGutter {
